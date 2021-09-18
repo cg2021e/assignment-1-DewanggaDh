@@ -4,7 +4,7 @@ Name of the thing is eraser
 
 Top Right
 
-![WhatsApp Image 2021-09-18 at 08 31 40](https://user-images.githubusercontent.com/73766205/133867795-a4c8f5ee-22cd-44e7-81c6-53640e877b1c.jpeg :height="50%" width="50%")
+![WhatsApp Image 2021-09-18 at 08 31 40](https://user-images.githubusercontent.com/73766205/133867795-a4c8f5ee-22cd-44e7-81c6-53640e877b1c.jpeg height="50%" width="50%")
 
 Top Left
 

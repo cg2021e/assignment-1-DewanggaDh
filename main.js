@@ -99,7 +99,9 @@ function main(){
 
         0.15, 0.85, 0.125, 0.125, 0.125,
         -0.05, 0.7, 0.005, 0.005, 0.005,
-        0.2, 0.75, 0.005, 0.005, 0.005
+        0.2, 0.75, 0.005, 0.005, 0.005,
+
+        0.0, 0.0, 0.0, 0.0, 0.0
     ];
 
     // for (let index = 0; index < vertices.length; index + 5) {
@@ -251,7 +253,7 @@ function main(){
     // speed[0] = speedRaw[0] / framerate / 10;
     // speed[1] = speedRaw[1] / framerate / 10;
    
-    var speed = [0, 0/600];
+    var speed = [0, 2/600];
     // //var speed1 = [0, 1/600];
     var uChange = gl.getUniformLocation(shaderProgram, "uChange");
     // //var uChange1 = gl.getUniformLocation(shaderProgram1, "uChange");
@@ -270,8 +272,15 @@ function main(){
             
             //gl.drawArrays(gl.TRIANGLE, 0, 3);
         //gl.useProgram(shaderProgram1);
-            change[0] = change[0] + speed[0];
-            change[1] = change[1] + speed[1];
+        if(change[1] > 0.125 || change[1] < -0.1)
+        {
+            speed[0] = -speed[0];
+            speed[1] = -speed[1];
+        }
+        change[1] = change[1] + speed[1];
+        
+            // change[0] = change[0] + speed[0];
+            // change[1] = change[1] + speed[1];
             // // change1[0] = change1[0] + speed1[0];
             // // change1[1] = change1[1] + speed1[1];
              gl.uniform2fv(uChange, change);
@@ -286,8 +295,8 @@ function main(){
             
         //     gl.useProgram(shaderProgram1);
         // }
-        // if (change >= 0.5 || change <= -0.5) speed = -speed;
-        // change = change + speed;
+        //if (change >= 0.5 || change <= -0.5) speed = -speed;
+        //change = change + speed;
         // gl.uniform1f(uChange, change);
         gl.clearColor(1, 1, 1, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
@@ -300,8 +309,15 @@ function main(){
         //gl.drawArrays(gl.TRIANGLES, 0,6);
         requestAnimationFrame(render);
     }
+
+    //change = [0.5,0];
+
+        //gl.drawArrays(gl.POINT, 63, 0);
     
     //render();
     //setInterval(render, 1000/framerate);
     requestAnimationFrame(render);
 }
+
+
+// haha, eraser go boing boing

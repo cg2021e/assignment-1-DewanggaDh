@@ -289,7 +289,7 @@ function main(){
         // if (change >= 0.5 || change <= -0.5) speed = -speed;
         // change = change + speed;
         // gl.uniform1f(uChange, change);
-        gl.clearColor(0.5, 0, 0, 0.5);
+        gl.clearColor(1, 1, 1, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
         var primitive = gl.TRIANGLE_FAN;
         var offset = 0;

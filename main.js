@@ -1,6 +1,9 @@
-function main(){
-   var canvas = document.getElementById('myCanvas');
+var canvas = document.getElementById('myCanvas');
    var gl = canvas.getContext('webgl');
+   gl.clearColor(1, 1, 1, 1);
+   gl.clear(gl.COLOR_BUFFER_BIT);
+function main(){
+   
 
    //titik (koordinat biasa, tergantung banyaknya)
     //(rgb)
@@ -253,11 +256,11 @@ function main(){
     // speed[0] = speedRaw[0] / framerate / 10;
     // speed[1] = speedRaw[1] / framerate / 10;
    
-    var speed = [0, 2/600];
+    var speed = [0, 174/60000];
     // //var speed1 = [0, 1/600];
     var uChange = gl.getUniformLocation(shaderProgram, "uChange");
     // //var uChange1 = gl.getUniformLocation(shaderProgram1, "uChange");
-    var change = [-0.5,0];
+    var change = [0.5,0];
     // //var change1 = [0,0];
     
     // var speedRaw = 1;
@@ -298,8 +301,7 @@ function main(){
         //if (change >= 0.5 || change <= -0.5) speed = -speed;
         //change = change + speed;
         // gl.uniform1f(uChange, change);
-        gl.clearColor(1, 1, 1, 1);
-        gl.clear(gl.COLOR_BUFFER_BIT);
+        
         var primitive = gl.TRIANGLE_FAN;
         var offset = 0;
         var nVertex = 54;
@@ -318,6 +320,3 @@ function main(){
     //setInterval(render, 1000/framerate);
     requestAnimationFrame(render);
 }
-
-
-// haha, eraser go boing boing

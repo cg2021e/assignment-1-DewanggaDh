@@ -102,7 +102,7 @@ function main(){
 
         0.65, 0.85, 0.125, 0.125, 0.125,
         0.45, 0.7, 0.005, 0.005, 0.005,
-        0.7, 0.75, 0.005, 0.005, 0.005,
+        0.7, 0.75, 0.005, 0.005, 0.005
 
         // -0.2, -0.75, 0.0, .0, 0.0,
         // -0.215, -0.25, 0.0, .0, 0.0,
@@ -188,6 +188,10 @@ function main(){
         // -0.05, 0.7, 0.005, 0.005, 0.005,
         // 0.2, 0.75, 0.005, 0.005, 0.005,
 
+        
+    ];
+
+    var vertices1 = [
         -0.775, -0.9, 0.0, 0.0, 0.0,
         -0.85, 0.6, 0.0, 0.0, 0.0,
         -0.775, 0.75, 0.0, 0.0, 0.0,
@@ -264,8 +268,9 @@ function main(){
         -0.85, 0.6, 0.05, 0.05, 0.05,
         -0.775, 0.75, 0.05, 0.05, 0.05
     ];
-
-    var vertices1;
+    var vertices2 = [
+        ...vertices1, ...vertices
+    ];
 
     // vertices.foreach((value, index) => {
     //     if(index % 5 === 0){
@@ -279,7 +284,7 @@ function main(){
     //linked list vertice
     var buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices2), gl.STATIC_DRAW);
 
     // var vertices1 = [
     //     -1, -0.5, 0, 1.0, 0,
@@ -300,9 +305,9 @@ function main(){
         attribute vec2 aPosition;
         attribute vec3 aColor;
         varying vec3 vColor;
-        uniform vec2 uChange;
+        uniform mat4 uChange;
         void main() {
-            gl_Position = vec4(aPosition + uChange, 0.0, 1.0);
+            gl_Position = uChange * vec4(aPosition, 0.0, 1.0);
             vColor = aColor;
         }
     `;
@@ -421,11 +426,14 @@ function main(){
     // speed[0] = speedRaw[0] / framerate / 10;
     // speed[1] = speedRaw[1] / framerate / 10;
    
-    var speed = [0, 174/60000];
+    var speed = 0.0029 ;
+    
+
+
     // //var speed1 = [0, 1/600];
     var uChange = gl.getUniformLocation(shaderProgram, "uChange");
     // //var uChange1 = gl.getUniformLocation(shaderProgram1, "uChange");
-    var change = [0,0];
+    var change = 0;
     // //var change1 = [0,0];
     // var speedRaw = 1;
     // var speed = speedRaw / 600;
@@ -440,12 +448,23 @@ function main(){
             
             //gl.drawArrays(gl.TRIANGLE, 0, 3);
         //gl.useProgram(shaderProgram1);
-        if(change[1] > 0.125 || change[1] < -0.1)
+        if(change > 0.125 || change < -0.1)
         {
-            speed[0] = -speed[0];
-            speed[1] = -speed[1];
+            speed = -speed;
         }
-        change[1] = change[1] + speed[1];
+        change += speed;
+        var right = [
+            1.0, 0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, change, 0.0, 1.0
+        ]
+        var left = [
+            1.0, 0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0
+        ]
         // vertices.forEach((value, index) => {
         //     if(index >= 270) {
         //         value += speed[1];
@@ -456,7 +475,7 @@ function main(){
             // change[1] = change[1] + speed[1];
             // // change1[0] = change1[0] + speed1[0];
             // // change1[1] = change1[1] + speed1[1];
-            gl.uniform2fv(uChange, change);
+            
             //gl.uniform2fv(uChange1, change1);
             //gl.drawArrays(gl.TRIANGLE_FAN, 0, 6);
             //gl.drawArrays(gl.TRIANGLE, 3,3);
@@ -472,15 +491,19 @@ function main(){
         //change = change + speed;
         // gl.uniform1f(uChange, change);
         
-        var primitive = gl.TRIANGLES;
-        var offset = 0;
-        var nVertex = 54;
+        gl.uniformMatrix4fv(uChange, false, left);
+        // var primitive = gl.TRIANGLES;
+        // var offset = 0;
+        // var nVertex = 54;
         
-        gl.drawArrays(primitive, offset, nVertex);
+        gl.drawArrays(gl.TRIANGLES, 0, 54);
         //gl.drawArrays(gl.TRIANGLE_FAN, 54, 9);
-        gl.drawArrays(gl.TRIANGLES, 54, 57);
+        //change[1] = 0;
+        //gl.uniform2fv(uChange, change);
+        gl.uniformMatrix4fv(uChange, false, right);
+        gl.drawArrays(gl.TRIANGLES, 57, 63);
         //gl.drawArrays(gl.TRIANGLES, 0,6);
-        gl.drawArrays(gl.TRIANGLES, 111, 9);
+        //gl.drawArrays(gl.TRIANGLES, 111, 9);
         requestAnimationFrame(render);
         
     }

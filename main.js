@@ -1,371 +1,240 @@
 var canvas = document.getElementById('myCanvas');
    var gl = canvas.getContext('webgl');
-   gl.clearColor(1, 1, 1, 1);
-   gl.clear(gl.COLOR_BUFFER_BIT);
-function main(){
    
+function main(){
 
-   //titik (koordinat biasa, tergantung banyaknya)
-    //(rgb)
     var vertices = [
-        // 0.5, -0.5, 1.0, 0, 0,
-        // 1, -0.5, 1.0, 0, 0,
-        // 0.5, 0.5, 1.0, 0, 0,
-        // -1, -0.5, 0, 1.0, 0,
-        // -0.5, -0.5, 0, 1.0, 0,
-        // -0.5, 0.5, 0, 1.0, 0
-        // 0.5, -0.5, 0.0, 1.0, 0.0,    // Point B
-        // -0.5, -0.5, 1.0, 0.0, 0.0,    // Point A
-        // -0.5,  0.5, 0.0, 0.0, 1.0,    // Point C
-        //  0.5,  0.5, 1.0, 1.0, 1.0,    // Point D
-        //  0.5, -0.5, 0.0, 1.0, 0.0,    // Point B
-        // -0.5,  0.5, 0.0, 0.0, 1.0     // Point C
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.285, -0.25, 0.0, .0, 0.0,
-        0.275, 0.3, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.275, 0.3, 0.0, .0, 0.0,
-        0.275, 0.55, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.275, 0.55, 0.0, .0, 0.0,
-        0.2875, 0.7, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.2875, 0.7, 0.0, .0, 0.0,
-        0.3, 0.75, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.3, 0.75, 0.0, .0, 0.0,
-        0.35, 0.8, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.35, 0.8, 0.0, .0, 0.0,
-        0.5, 0.875, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.5, 0.875, 0.0, .0, 0.0,
-        0.6, 0.875, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.6, 0.875, 0.0, .0, 0.0,
-        0.65, 0.85, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.65, 0.85, 0.0, .0, 0.0,
-        0.675, 0.8, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.675, 0.8, 0.0, .0, 0.0,
-        0.7, 0.75, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.7, 0.75, 0.0, .0, 0.0,
-        0.705, 0.5, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.705, 0.5, 0.0, .0, 0.0,
-        0.7, -0.2, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.7, -0.2, 0.0, .0, 0.0,
-        0.675, -0.75, 0.0,.0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.675, -0.75, 0.0,.0, 0.0,
-        0.6625, -0.8, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.6625, -0.8, 0.0, .0, 0.0,
-        0.575, -0.9, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.575, -0.9, 0.0, .0, 0.0,
-        0.45, -0.875, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.45, -0.875, 0.0, .0, 0.0,
-        0.375, -0.85, 0.0, .0, 0.0,
-
-        0.3, -0.75, 0.0, .0, 0.0,
-        0.375, -0.85, 0.0, .0, 0.0,
-        0.375, -0.8, 0.0, .0, 0.0,
-
-        0.65, 0.85, 0.125, 0.125, 0.125,
-        0.5, 0.875, 0.0, 0.0, 0.0,
-        0.45, 0.7, 0.0, 0.0, 0.0,
-
-        0.65, 0.85, 0.125, 0.125, 0.125,
-        0.5, 0.875, 0.0, 0.0, 0.0,
-        0.55, 0.875, 0.0, 0.0, 0.0,
-
-        0.65, 0.85, 0.125, 0.125, 0.125,
-        0.45, 0.7, 0.005, 0.005, 0.005,
-        0.7, 0.75, 0.005, 0.005, 0.005
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.215, -0.25, 0.0, .0, 0.0,
-        // -0.225, 0.3, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.225, 0.3, 0.0, .0, 0.0,
-        // -0.225, 0.55, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.225, 0.55, 0.0, .0, 0.0,
-        // -0.2125, 0.7, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.2125, 0.7, 0.0, .0, 0.0,
-        // -0.2, 0.75, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.2, 0.75, 0.0, .0, 0.0,
-        // -0.15, 0.8, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.15, 0.8, 0.0, .0, 0.0,
-        // 0.0, 0.85, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.0, 0.85, 0.0, .0, 0.0,
-        // 0.1, 0.875, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.1, 0.875, 0.0, .0, 0.0,
-        // 0.15, 0.85, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.15, 0.85, 0.0, .0, 0.0,
-        // 0.175, 0.8, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.175, 0.8, 0.0, .0, 0.0,
-        // 0.2, 0.75, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.2, 0.75, 0.0, .0, 0.0,
-        // 0.205, 0.5, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.205, 0.5, 0.0, .0, 0.0,
-        // 0.2, -0.2, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.2, -0.2, 0.0, .0, 0.0,
-        // 0.175, -0.75, 0.0,.0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.175, -0.75, 0.0,.0, 0.0,
-        // 0.1625, -0.8, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.1625, -0.8, 0.0, .0, 0.0,
-        // 0.075, -0.9, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // 0.075, -0.9, 0.0, .0, 0.0,
-        // -0.05, -0.875, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.05, -0.875, 0.0, .0, 0.0,
-        // -0.125, -0.85, 0.0, .0, 0.0,
-
-        // -0.2, -0.75, 0.0, .0, 0.0,
-        // -0.125, -0.85, 0.0, .0, 0.0,
-        // -0.175, -0.8, 0.0, .0, 0.0,
-
-        // 0.15, 0.85, 0.125, 0.125, 0.125,
-        // 0.0, 0.85, 0.0, 0.0, 0.0,
-        // -0.05, 0.7, 0.0, 0.0, 0.0,
-
-        // 0.15, 0.85, 0.125, 0.125, 0.125,
-        // 0.0, 0.85, 0.0, 0.0, 0.0,
-        // 0.05, 0.875, 0.0, 0.0, 0.0,
-
-        // 0.15, 0.85, 0.125, 0.125, 0.125,
-        // -0.05, 0.7, 0.005, 0.005, 0.005,
-        // 0.2, 0.75, 0.005, 0.005, 0.005,
-
-        
+        //Front square
+        -2, 0.5, 1,     0.1, 0.1, 0.1,    -1.25, -0.25, 1,
+        -0.5, 0.5, 1,   0.1, 0.1, 0.1,    -1.25, -0.25, 1,
+        -0.5, -1, 1,    0.1, 0.1, 0.1,    -1.25, -0.25, 1,
+        -2, -1, 1,      0.1, 0.1, 0.1,    -1.25, -0.25, 1,
+        //triangle front
+        -2, 0.5, 1,     0.1, 0.1, 0.1,    -1.25, 0.6875, 0.95,
+        -1, 0.875, 0.9, 0.1, 0.1, 0.1,    -1.25, 0.6875, 0.95,
+        -0.5, 0.5, 1,   0.1, 0.1, 0.1,    -1.25, 0.6875, 0.95,
+        //left side
+        -2, 0.5, 1,     0.1, 0.1, 0.1,    -2, -0.25, 0.25,
+        -2, 0.5, 0.5,   0.1, 0.1, 0.1,    -2, -0.25, 0.25,
+        -2, -1, 0.5,    0.1, 0.1, 0.1,    -2, -0.25, 0.25,
+        -2, -1,  1,     0.1, 0.1, 0.1,    -2, -0.25, 0.25,
+        //right side
+        -0.5, 0.5, 1,   0.1, 0.1, 0.1,    -0.5, -0.25, 0.25,
+        -0.5, 0.5, 0.5, 0.1, 0.1, 0.1,    -0.5, -0.25, 0.25,
+        -0.5, -1, 0.5,  0.1, 0.1, 0.1,    -0.5, -0.25, 0.25,
+        -0.5, -1, 1,    0.1, 0.1, 0.1,    -0.5, -0.25, 0.25,
+        //left roof
+        -2, 0.5, 1,         0.1, 0.1, 0.1, -1.5, 0.6875, 0.75,
+        -1, 0.875, 0.9,     0.1, 0.1, 0.1, -1.5, 0.6875, 0.75,
+        -1.5, 0.875, 0.5,   0.1, 0.1, 0.1, -1.5, 0.6875, 0.75,
+        -2, 0.5, 0.5,       0.1, 0.1, 0.1, -1.5, 0.6875, 0.75,
+        //right roof
+        -1, 0.875, 0.9,    0.1, 0.1, 0.1, -1, 0.6875, 0.75,
+        -0.5, 0.5, 1,      0.1, 0.1, 0.1, -1, 0.6875, 0.75,
+        -0.5, 0.5, 0.5,     0.1, 0.1, 0.1, -1, 0.6875, 0.75,
+        -1.5, 0.875, 0.5,   0.1, 0.1, 0.1, -1, 0.6875, 0.75,
+        //backtrapezium
+        -2, 0.5, 0.5,       0.1, 0.1, 0.1, -1.25, -0.25, 0.5,
+        -1.5, 0.875, 0.5,   0.1, 0.1, 0.1,  -1.25, -0.25, 0.5,
+        -0.5, 0.5, 0.5,     0.1, 0.1, 0.1,  -1.25, -0.25, 0.5,
+        -0.5, -1, 0.5,      0.1, 0.1, 0.1,  -1.25, -0.25, 0.5,
+        -2, -1, 0.5,       0.1, 0.1, 0.1,  -1.25, -0.25, 0.5,
+        //base
+        -2, -1, 1,      0.1, 0.1, 0.1, -1.25, -1, 0.25,
+        -0.5, -1, 1,    0.1, 0.1, 0.1, -1.25, -1, 0.25,
+        -0.5, -1, 0.5,  0.1, 0.1, 0.1, -1.25, -1, 0.25,
+        -2, -1, 0.5,    0.1, 0.1, 0.1, -1.25, -1, 0.25
     ];
 
     var vertices1 = [
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.85, 0.6, 0.0, 0.0, 0.0,
-        -0.775, 0.75, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.775, 0.75, 0.0, 0.0, 0.0,
-        -0.65, 0.9, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.65, 0.9, 0.0, 0.0, 0.0,
-        -0.6, 0.925, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.6, 0.925, 0.0, 0.0, 0.0,
-        -0.55, 0.9, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.55, 0.9, 0.0, 0.0, 0.0,
-        -0.4, 0.8, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.4, 0.8, 0.0, 0.0, 0.0,
-        -0.3, 0.7, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.3, 0.7, 0.0, 0.0, 0.0,
-        -0.275, 0.65, 0.0, 0.0, 0.0,
-        
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.275, 0.65, 0.0, 0.0, 0.0,
-        -0.225, 0.05, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.225, 0.05, 0.0, 0.0, 0.0,
-        -0.25, -0.75, 0.0, 0.0, 0.0,
-        
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.25, -0.75, 0.0, 0.0, 0.0,
-        -0.3375, -0.9, 0.0, 0.0, 0.0,
-
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.3375, -0.9, 0.0, 0.0, 0.0,
-        -0.375, -0.95, 0.0, 0.0, 0.0,
-        
-        -0.775, -0.9, 0.0, 0.0, 0.0,
-        -0.375, -0.95, 0.0, 0.0, 0.0,
-        -0.65, -0.95, .0, 0.0, 0.0,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.6, 0.925, 0.2, 0.2, 0.2,
-        -0.4, 0.8, 0.2, 0.2, 0.2,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.4, 0.8, 0.2, 0.2, 0.2,
-        -0.275, 0.65, 0.0, 0.0, 0.0,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.275, 0.65, 0.0, 0.0, 0.0,
-        -0.23, 0.1, 0.0, 0.0, 0.0,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.23, 0.1, 0.0, 0.0, 0.0,
-        -0.425, 0.35, 0.0, 0.0, 0.0,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.425, 0.35, 0.0, 0.0, 0.0,
-        -0.8125, -0.2, 0.0, 0.0, 0.0,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.8125, -0.2, 0.0, 0.0, 0.0,
-        -0.85, 0.6, 0.05, 0.05, 0.05,
-
-        -0.65, 0.9, 0.2, 0.2, 0.2,
-        -0.85, 0.6, 0.05, 0.05, 0.05,
-        -0.775, 0.75, 0.05, 0.05, 0.05
+        //Front square
+        2, 0.5, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        0.5, 0.5, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        0.5, -1, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        2, -1, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        //triangle front
+        2, 0.5, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        1, 0.875, 0.4, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        0.5, 0.5, 0.5, 0.1, 0.1, 0.1, 1.25, -0.25, 0.5,
+        //left side
+        2, 0.5, 1, 0.1, 0.1, 0.1, 2, -0.25, 0.25,
+        2, 0.5, 0.5, 0.1, 0.1, 0.1, 2, -0.25, 0.25,
+        2, -1, 0.5, 0.1, 0.1, 0.1, 2, -0.25, 0.25,
+        2, -1,  1, 0.1, 0.1, 0.1, 2, -0.25, 0.25,
+        //right side
+        0.5, 0.5, 1, 0.1, 0.1, 0.1, 0.5, -0.25, 0.25,
+        0.5, 0.5, 0.5, 0.1, 0.1, 0.1, 0.5, -0.25, 0.25,
+        0.5, -1, 0.5, 0.1, 0.1, 0.1, 0.5, -0.25, 0.25,
+        0.5, -1, 1, 0.1, 0.1, 0.1, 0.5, -0.25, 0.25,
+        //left roof
+        2, 0.5, 1, 0.1, 0.1, 0.1, 1.5, 0.6875, 0.25,
+        2, 0.5, 0.5, 0.1, 0.1, 0.1, 1.5, 0.6875, 0.25,
+        1, 0.875, 0.4, 0.1, 0.1, 0.1, 1.5, 0.6875, 0.25,
+        1.5, 0.875, 1, 0.1, 0.1, 0.1, 1.5, 0.6875, 0.25,
+        //right roof
+        1, 0.875, 0.4, 0.1, 0.1, 0.1, 1, 0.6875, 0.25,
+        1.5, 0.875, 1, 0.1, 0.1, 0.1, 1, 0.6875, 0.25,
+        0.5, 0.5, 1, 0.1, 0.1, 0.1, 1, 0.6875, 0.25,
+        0.5, 0.5, 0.5, 0.1, 0.1, 0.1, 1, 0.6875, 0.25,
+        //backtrapezium
+        2, 0.5, 1, 0.1, 0.1, 0.1, 1.25, -0.25, 1,
+        1.5, 0.875, 1, 0.1, 0.1, 0.1, 1.25, -0.25, 1,
+        0.5, 0.5, 1, 0.1, 0.1, 0.1, 1.25, -0.25, 1,
+        0.5, -1, 1, 0.1, 0.1, 0.1, 1.25, -0.25, 1,
+        2, -1, 1, 0.1, 0.1, 0.1, 1.25, -0.25, 1,
+        //base
+        2, -1, 1, 0.1, 0.1, 0.1, 1.25, -1, 0.75,
+        0.5, -1, 1, 0.1, 0.1, 0.1, 1.25, -1, 0.75,
+        0.5, -1, 0.5, 0.1, 0.1, 0.1, 1.25, -1, 0.75,
+        2, -1, 0.5, 0.1, 0.1, 0.1, 1.25, -1, 0.75
     ];
+
+    var vertices3 = [
+        0.05, 0.05, -0.1, 1, 1, 1, -0.1, -0.1, -0.1,
+        0.05, -0.05, -0.1, 1, 1, 1, -0.1, -0.1, -0.1,
+        -0.05, -0.05, -0.1, 1, 1, 1, -0.1, -0.1, -0.1,
+        -0.05, 0.05, -0.1, 1, 1, 1, -0.1, -0.1, -0.1,
+
+        0.05, 0.05, -0.1, 1, 1, 1, 0.5, 0, -0.05,
+        0.05, -0.05, -0.1, 1, 1, 1, 0.5, 0, -0.05,
+        0.05, -0.05, 0, 1, 1, 1, 0.5, 0, -0.05,
+        0.05, 0.05, 0, 1, 1, 1, 0.5, 0, -0.05,
+
+        -0.05, 0.05, -0.1, 1, 1, 1, -0.05, 0, -0.05,
+        -0.05, -0.05, -0.1, 1, 1, 1, -0.05, 0, -0.05,
+        -0.05, -0.05, 0, 1, 1, 1, -0.05, 0, -0.05,
+        -0.05, 0.05, 0, 1, 1, 1, -0.05, 0, -0.05,
+
+        0.05, 0.05, 0, 1, 1, 1, 0, 0, 0,
+        0.05, -0.05, 0, 1, 1, 1, 0, 0, 0,
+        -0.05, -0.05, 0, 1, 1, 1, 0, 0, 0,
+        -0.05, 0.05, 0, 1, 1, 1, 0, 0, 0,
+
+        -0.05, 0.05, -0.1, 1, 1, 1, 0, 0.05, -0.05,
+        0.05, 0.05, -0.1, 1, 1, 1, 0, 0.05, -0.05,
+        0.05, 0.05, 0, 1, 1, 1, 0, 0.05, -0.05,
+        -0.05, 0.05, 0, 1, 1, 1, 0, 0.05, -0.05,
+
+        0.05, -0.05, -0.1, 1, 1, 1, 0, -0.05, -0.05,
+        -0.05, -0.05, -0.1, 1, 1, 1, 0, -0.05, -0.05,
+        -0.05, -0.05, 0, 1, 1, 1, 0, -0.05, -0.05,
+        0.05, -0.05, 0, 1, 1, 1, 0, -0.05, -0.05
+    ];
+
+    var indices = [
+        0, 1, 2, 0, 2, 3,
+        4, 5, 6,
+        7, 8, 9, 7, 9, 10,
+        11, 12, 13, 11, 13, 14,
+        15, 16, 17, 15, 17, 18,
+        19, 20, 21, 19, 21, 22,
+        23, 24, 25, 23, 25, 26, 23, 26, 27,
+        28, 29, 30, 28, 30, 31
+    ];
+
+    var indices1 = [
+        32, 33, 34, 32, 34, 35,
+        36, 37, 38,
+        39, 40, 41, 39, 41, 42,
+        43, 44, 45, 43, 45, 46,
+        47, 48, 49, 47, 49, 50,
+        51, 52, 53, 51, 53, 54,
+        55, 56, 57, 55, 57, 58, 55, 58, 59,
+        60, 61, 62, 60, 62, 63
+    ];
+
+    var indices3 = [
+        64, 65, 66, 64, 66, 67,
+        68, 69, 70, 68, 70, 71,
+        72, 73, 74, 72, 74, 75,
+        76, 77, 78, 76, 78, 79,
+        80, 81, 82, 80, 82, 83,
+        84, 85, 86, 84, 86, 87
+    ];
+
     var vertices2 = [
-        ...vertices1, ...vertices
+        ...vertices, ...vertices1, ...vertices3
     ];
 
-    // vertices.foreach((value, index) => {
-    //     if(index % 5 === 0){
-    //         value += 0.5
-    //     }
-    // })
+    var indices2 = [
+        ...indices, ...indices1, ...indices3
+    ];
 
-    // for (let index = 0; index < vertices.length; index + 5) {
-    //     vertices[index] *= 0.5;
-    // }
-    //linked list vertice
-    var buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    var vertexbuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexbuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices2), gl.STATIC_DRAW);
 
-    // var vertices1 = [
-    //     -1, -0.5, 0, 1.0, 0,
-    //     -0.5, -0.5, 0, 1.0, 0,
-    //     -0.5, 0.5, 0, 1.0, 0
-    // ];
+    var indexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices2), gl.STATIC_DRAW);
     
-    // var buffer1 = gl.createBuffer();
-    // gl.bindBuffer(gl.ARRAY_BUFFER + 3, buffer1);
-    // gl.bufferData(gl.ARRAY_BUFFER + 3, new Float32Array(vertices1), gl.STATIC_DRAW);
-
-   //Bentuk dan posisi kotak
-   //vec4(Horizontal, vertical, ??, harus 1 supaya ada)
-//     var vertexShaderSource = document.getElementById("vertexShaderSource").text;
-//         //warna kotak
-//    var fragmentShaderSource = document.getElementById("fragmentShaderSource").text;
     var vertexShaderSource = `
-        attribute vec2 aPosition;
-        attribute vec3 aColor;
-        varying vec3 vColor;
-        uniform mat4 uChange;
-        uniform mat4 translata;
-        uniform mat4 moveit;
-        void main() {
-            gl_Position = uChange * (translata * vec4(aPosition, 0.0, 1.0));
-            vColor = aColor;
-        }
+    attribute vec3 aPosition;
+    attribute vec3 aColor;
+    attribute vec3 aNormal;
+    varying vec3 vColor;
+    varying vec3 vNormal;
+    uniform mat4 uModel;
+    uniform mat4 uView;
+    uniform mat4 uProjection;
+    varying vec3 vPosition;
+    void main() {
+        gl_Position = uProjection * uView * uModel * (vec4(aPosition * 2.0 / 3.0, 1.0));
+        vColor = aColor;
+        vNormal = aNormal;
+        vPosition = (uModel * (vec4(aPosition * 2. / 3., 1.))).xyz;
+    }
     `;
 
     var fragmentShaderSource = `
     precision mediump float;
-    varying vec3 vColor;
-    void main() {
-        gl_FragColor = vec4(vColor, 1.0);
-    }
+        varying vec3 vColor;
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        uniform vec3 uLightConstant;
+        uniform float uAmbientIntensity;
+        uniform vec3 uLightPosition;
+        uniform mat3 uNormalModel;
+        uniform vec3 uViewerPosition;
+        uniform mat4 uChangepos;
+        uniform mat4 transfer;
+        void main() {
+            vec3 ambient = uLightConstant * uAmbientIntensity;
+            vec3 lightDirection = uLightPosition - vPosition;
+            vec3 normalizedLight = normalize(lightDirection);
+            vec3 normalizedNormal = normalize(uNormalModel * vNormal);
+            float cosTheta = dot(normalizedNormal, normalizedLight);
+            vec3 diffuse = vec3(0., 0., 0.);
+            if (cosTheta > 0.) {
+                float diffuseIntensity = cosTheta;
+                diffuse = uLightConstant * diffuseIntensity;
+            }
+            vec3 reflector = reflect(-lightDirection, normalizedNormal);
+            vec3 normalizedReflector = normalize(reflector);
+            vec3 normalizedViewer = normalize(uViewerPosition - vPosition);
+            float cosPhi = dot(normalizedReflector, normalizedViewer);
+            vec3 specular = vec3(0., 0., 0.);
+            if (cosPhi > 0.) {
+                float shininessConstant = 100.0; 
+                float specularIntensity = pow(cosPhi, shininessConstant); 
+                specular = uLightConstant * specularIntensity;
+            }
+            vec3 phong = ambient + diffuse + specular;
+            gl_FragColor = vec4(phong * vColor, 1.);
+        }
 `;
     var vertexShader = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(vertexShader, vertexShaderSource);
     gl.compileShader(vertexShader);
 
-    // var vertexShaderSource1 = `
-    //     attribute vec2 aPosition1;
-    //     attribute vec3 aColor1;
-    //     varying vec3 vColor1;
-    //     uniform vec2 uChange1;
-    //     void main() {
-    //         gl_PointSize = 40.0;
-    //         gl_Position = vec4(aPosition1 + uChange1, 0.0, 1.0);
-    //         vColor1 = aColor1;
-    //     }
-    // `;
-
-    // var vertexShader1 = gl.createShader(gl.VERTEX_SHADER);
-    // gl.shaderSource(vertexShader1, vertexShaderSource1);
-    // gl.compileShader(vertexShader1);
-
-    
-
     var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
     gl.shaderSource(fragmentShader, fragmentShaderSource);
     gl.compileShader(fragmentShader);
 
-    // var fragmentShaderSource1 = `
-    //     precision mediump float;
-    //     varying vec3 vColor1;
-    //     void main() {
-    //         gl_FragColor = vec4(vColor1, 1.0);
-    //     }
-    // `;
-
-    // var fragmentShader1 = gl.createShader(gl.FRAGMENT_SHADER);
-    // gl.shaderSource(fragmentShader1, fragmentShaderSource1);
-    // gl.compileShader(fragmentShader1);
-
     var shaderProgram = gl.createProgram();
-    //var shaderProgram1 = gl.createProgram();
 
     gl.attachShader(shaderProgram, vertexShader);
     gl.attachShader(shaderProgram, fragmentShader);
-    // gl.attachShader(shaderProgram1, vertexShader1);
-    // gl.attachShader(shaderProgram1, fragmentShader1);
 
     gl.linkProgram(shaderProgram);
     //gl.linkProgram(shaderProgram1);
@@ -375,10 +244,10 @@ function main(){
     var aPosition = gl.getAttribLocation(shaderProgram, "aPosition");
     gl.vertexAttribPointer(
         aPosition,
-        2,
+        3,
         gl.FLOAT,
         false,
-        5 * Float32Array.BYTES_PER_ELEMENT,
+        9 * Float32Array.BYTES_PER_ELEMENT,
         0
     );
     gl.enableVertexAttribArray(aPosition);
@@ -389,161 +258,139 @@ function main(){
         3,
         gl.FLOAT,
         false,
-        5 * Float32Array.BYTES_PER_ELEMENT,
-        2 * Float32Array.BYTES_PER_ELEMENT
+        9 * Float32Array.BYTES_PER_ELEMENT,
+        3 * Float32Array.BYTES_PER_ELEMENT
     );
     gl.enableVertexAttribArray(aColor);
-    // var aPosition1 = gl.getAttribLocation(shaderProgram1, "aPosition");
-    // gl.vertexAttribPointer(
-    //     aPosition1,
-    //     2,
-    //     gl.FLOAT,
-    //     false,
-    //     5 * Float32Array.BYTES_PER_ELEMENT,
-    //     0
-    // );
-    // gl.enableVertexAttribArray(aPosition1);
 
-    // var aColor1 = gl.getAttribLocation(shaderProgram1, "aColor");
-    // gl.vertexAttribPointer(
-    //     aColor1,
-    //     3,
-    //     gl.FLOAT,
-    //     false,
-    //     5 * Float32Array.BYTES_PER_ELEMENT,
-    //     2 * Float32Array.BYTES_PER_ELEMENT
-    // );
-    // gl.enableVertexAttribArray(aColor1);
-
-    // var freeze = false;
-    // function onMouseClick(event){
-    //     freeze = !freeze;
-    // }
-    // document.addEventListener("click", onMouseClick);
-
-    // var framerate = 60;
-    // var speedRaw = [0, 0];
-    // var speed = [];
-
-    // speed[0] = speedRaw[0] / framerate / 10;
-    // speed[1] = speedRaw[1] / framerate / 10;
+    var aNormal = gl.getAttribLocation(shaderProgram, "aNormal");
+    gl.vertexAttribPointer(
+        aNormal, 
+        3, 
+        gl.FLOAT, 
+        false, 
+        9 * Float32Array.BYTES_PER_ELEMENT, 
+        6 * Float32Array.BYTES_PER_ELEMENT
+    );
+    gl.enableVertexAttribArray(aNormal);
    
-    var speed = 0.0029 ;
-    
+    //var speed = 0.0029 ;
 
-
-    // //var speed1 = [0, 1/600];
-    var uChange = gl.getUniformLocation(shaderProgram, "uChange");
-    var translata = gl.getUniformLocation(shaderProgram, "translata");
-    //var moveit = gl.getUniformLocation(shaderProgram, "moveit");
-    // //var uChange1 = gl.getUniformLocation(shaderProgram1, "uChange");
-    var change = 0;
-    // //var change1 = [0,0];
-    // var speedRaw = 1;
-    // var speed = speedRaw / 600;
-    // var change = 0;
-    // var uChange = gl.getUniformLocation(shaderProgram, "uChange");
-    var sizeal = [
-        0.5, 0, 0, 0,
-        0, 0.25, 0, 0,
-        0, 0, 0.25, 0,
-        0, 0, 0, 1
-    ]
+    var uModel = gl.getUniformLocation(shaderProgram, "uModel");
+    var uView = gl.getUniformLocation(shaderProgram, "uView");
+    var uProjection = gl.getUniformLocation(shaderProgram, "uProjection");
     
-    // var moveright = [
-    //     1.0, 0.0, 0.0, 0.0,
-    //     0.0, 1.0, 0.0, 0.0,
-    //     0.0, 0.0, 1.0, 0.0,
-    //     0.375, 0.0, 0.0, 1.0
-    // ]
-    // var moveleft = [
-    //     1.0, 0.0, 0.0, 0.0,
-    //     0.0, 1.0, 0.0, 0.0,
-    //     0.0, 0.0, 1.0, 0.0,
-    //     -0.375, 0.0, 0.0, 1.0
-    // ]
-    gl.uniformMatrix4fv(translata, false, sizeal);
-   // gl.uniformMatrix4fv(moveit, false, moveright);
-    //gl.drawArrays(gl.TRIANGLES, 0,6);
-    function render(){
-        
-        //gl.useProgram(shaderProgram);
-        //gl.clearColor(red, green, blue, alpha)
-        //if (!freeze) {
-            
-            //gl.drawArrays(gl.TRIANGLE, 0, 3);
-        //gl.useProgram(shaderProgram1);
-        if(change > 0.7825 || change < -0.775)
-        {
-            speed = -speed;
+    var projection = glMatrix.mat4.create();
+    glMatrix.mat4.perspective(
+        projection,
+        Math.PI / 3,
+        1,
+        0.5,
+        10
+    );
+    gl.uniformMatrix4fv(uProjection, false, projection);
+    
+    var view = glMatrix.mat4.create();
+    var camera = [0,0,3];
+    var camera2 = [0,0,0];
+    var speedcam = [0,0,0/60];
+    var speed = [0/600, 0/60, 0/60];
+    var change = [0, 0, 0];
+    var freeze = false;
+
+    function onKeydown(event) {
+        if (event.keyCode == 87){
+            if(change[1] > 0.7)
+            speed[1] = 0;
+            else
+            speed[1] = 0.0029;
         }
-        change += speed;
-        var right = [
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, change, 0.0, 1.0
-        ]
-        var left = [
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
-        ]
-        //gl.uniformMatrix4fv(uChange, false, moveright);
-        
-        // vertices.forEach((value, index) => {
-        //     if(index >= 270) {
-        //         value += speed[1];
-        //     }
-        // })
-        
-            // change[0] = change[0] + speed[0];
-            // change[1] = change[1] + speed[1];
-            // // change1[0] = change1[0] + speed1[0];
-            // // change1[1] = change1[1] + speed1[1];
-            
-            //gl.uniform2fv(uChange1, change1);
-            //gl.drawArrays(gl.TRIANGLE_FAN, 0, 6);
-            //gl.drawArrays(gl.TRIANGLE, 3,3);
-            // if(change >= 0.5 || change <= -0.5) speed = -speed;
-            // change = change + speed;
-            // gl.uniform1f(uChange, change);
-        //}
-        // else {
-            
-        //     gl.useProgram(shaderProgram1);
-        // }
-        //if (change >= 0.5 || change <= -0.5) speed = -speed;
-        //change = change + speed;
-        // gl.uniform1f(uChange, change);
-        
-        gl.uniformMatrix4fv(uChange, false, left);
-        //gl.uniformMatrix4fv(uChange, false, moveleft);
-        // var primitive = gl.TRIANGLES;
-        // var offset = 0;
-        // var nVertex = 54;
-        
-        gl.drawArrays(gl.TRIANGLES, 0, 54);
-        //gl.drawArrays(gl.TRIANGLE_FAN, 54, 9);
-        //change[1] = 0;
-        //gl.uniform2fv(uChange, change);
-        //gl.uniformMatrix4fv(uChange, false, moveright);
-        gl.uniformMatrix4fv(uChange, false, right);
-        
-        gl.drawArrays(gl.TRIANGLES, 57, 63);
-        //gl.drawArrays(gl.TRIANGLES, 0,6);
-        //gl.drawArrays(gl.TRIANGLES, 111, 9);
-        requestAnimationFrame(render);
-        
+        if(event.keyCode == 83){
+            if(change[1] < -0.7)
+            speed[1] = 0;
+            else
+            speed[1] = -0.0029;
+        }
+        if(event.keyCode == 65){
+            if(camera[0] < -1)
+            speedcam[0] = 0;
+            else
+            speedcam[0] = -0.0029;
+        }
+        if(event.keyCode == 68){
+            if(camera[0] > 1)
+            speedcam[0] = 0;
+            else
+            speedcam[0] = 0.0029;
+        }
     }
     
+    function onKeyup(event) {
+        if (event.keyCode == 87){
+            speed[1] = 0;
+        }
+        if(event.keyCode == 83){
+            speed[1] = 0;
+        }
+        if(event.keyCode == 65){
+            speedcam[0] = 0;
+        }
+        if(event.keyCode == 68){
+            speedcam[0] = 0;
+        }
+    }
+    document.addEventListener("keydown", onKeydown, false);
+    document.addEventListener("keyup", onKeyup, true);
 
-    //change = [0.5,0];
 
-        //gl.drawArrays(gl.POINT, 63, 0);
-    
-    //render();
-    //setInterval(render, 1000/framerate);
+    function render(){
+        if(!freeze) {
+            camera2[0] = camera2[0] + speedcam[0];
+            camera[0] = camera[0] + speedcam[0];
+            glMatrix.mat4.lookAt(
+                view,
+                camera,      // camera position
+                camera2,      // the point where camera looks at
+                [0, 1, 0]       // up vector of the camera
+            );
+            gl.uniformMatrix4fv(uView, false, view);
+            
+        
+            var uLightConstant = gl.getUniformLocation(shaderProgram, "uLightConstant");
+            var uAmbientIntensity = gl.getUniformLocation(shaderProgram, "uAmbientIntensity");
+            
+            var uLightPosition = gl.getUniformLocation(shaderProgram, "uLightPosition");
+            
+            var uNormalModel = gl.getUniformLocation(shaderProgram, "uNormalModel");
+            var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
+            gl.uniform3fv(uViewerPosition, camera);
+            change[1] = change[1] + speed[1];
+
+            var model = glMatrix.mat4.create();
+
+            glMatrix.mat4.translate(model, model, change);
+            
+            gl.uniformMatrix4fv(uModel, false, model);
+
+            var normalModel = glMatrix.mat3.create();
+            glMatrix.mat3.normalFromMat4(normalModel, model);
+            gl.uniformMatrix3fv(uNormalModel, false, normalModel);
+
+            gl.enable(gl.DEPTH_TEST);
+            gl.clearColor(0.5, 0.5, 0.5, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.uniform3fv(uLightConstant, [0, 0, 0]);
+            gl.uniform1f(uAmbientIntensity, 0.029)
+            gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 0);
+            gl.uniform3fv(uLightConstant, [8.62, 8.62, 8.62]);
+            gl.uniform1f(uAmbientIntensity, 0.029);
+            gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 96);
+            gl.uniform3fv(uLightConstant, [1, 1, 1]);
+            gl.uniform1f(uAmbientIntensity, 1);
+            gl.uniform3fv(uLightPosition, [0.0, 0.0, 0.0]);
+            gl.drawElements(gl.TRIANGLES, indices3.length, gl.UNSIGNED_SHORT, 192);
+        }
+        requestAnimationFrame(render);
+    }
     requestAnimationFrame(render);
 }

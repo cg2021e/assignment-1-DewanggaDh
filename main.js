@@ -293,11 +293,12 @@ function main(){
     var view = glMatrix.mat4.create();
     var camera = [0,0,3];
     var camera2 = [0,0,0];
-    var speedcam = [0,0,0/60];
-    var speed = [0/600, 0/60, 0/60];
-    var change = [0, 0, 0];
+    //var speedcam = [0,0,0/60];
+    //var speed = [0/600, 0/60, 0/60];
+    //var change = [0, 0, 0];
     var freeze = false;
 
+    /*
     function onKeydown(event) {
         if (event.keyCode == 87){
             if(change[1] > 0.7)
@@ -341,12 +342,12 @@ function main(){
     }
     document.addEventListener("keydown", onKeydown, false);
     document.addEventListener("keyup", onKeyup, true);
-
+    */
 
     function render(){
         if(!freeze) {
-            camera2[0] = camera2[0] + speedcam[0];
-            camera[0] = camera[0] + speedcam[0];
+            //camera2[0] = camera2[0] + speedcam[0];
+            //camera[0] = camera[0] + speedcam[0];
             glMatrix.mat4.lookAt(
                 view,
                 camera,      // camera position
@@ -364,11 +365,11 @@ function main(){
             var uNormalModel = gl.getUniformLocation(shaderProgram, "uNormalModel");
             var uViewerPosition = gl.getUniformLocation(shaderProgram, "uViewerPosition");
             gl.uniform3fv(uViewerPosition, camera);
-            change[1] = change[1] + speed[1];
+            //change[1] = change[1] + speed[1];
 
             var model = glMatrix.mat4.create();
 
-            glMatrix.mat4.translate(model, model, change);
+            //glMatrix.mat4.translate(model, model, change);
             
             gl.uniformMatrix4fv(uModel, false, model);
 

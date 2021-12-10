@@ -481,3 +481,7 @@ function main(){
     }
     requestAnimationFrame(render);
 }
+
+//Thank you, Mr. Hadziq
+//But my laptop begs to differ
+//In terms of speed

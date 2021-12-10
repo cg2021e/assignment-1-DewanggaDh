@@ -312,7 +312,7 @@ function main(){
     var view = glMatrix.mat4.create();
     var camera = [0,0,3];
     var camera2 = [0,0,0];
-    //var speedcam = [0,0,0/60];
+    var speedcam = [0,0,0/60];
     //var speed = [0/600, 0/60, 0/60];
     //var change = [0, 0, 0];
     var freeze = false;
@@ -342,10 +342,40 @@ function main(){
             }
         }
         
+        if(event.keyCode == 38)
+        {
+            speedcam[2] = -0.029;
+        }
+        if(event.keyCode == 40)
+        {
+            speedcam[2] = 0.029;
+        }
+        if(event.keyCode == 37)
+        {
+            speedcam[0] = -0.029;
+        }
+        if(event.keyCode == 39)
+        {
+            speedcam[0] = 0.029;
+        }
     }
     
     function onKeyup(event) {
-        if (event.keyCode == 87){
+        if(event.keyCode == 38)
+            {
+                speedcam[2] = 0;
+            }
+            if(event.keyCode == 40)
+            {
+                speedcam[2] = 0;
+            }
+        if(event.keyCode == 37)
+        {
+            speedcam[0] = 0;
+        }
+        if(event.keyCode == 39)
+        {
+            speedcam[0] = 0;
         }
     }
     
@@ -355,7 +385,8 @@ function main(){
 
     function render(){
         if(!freeze) {
-            //camera2[0] = camera2[0] + speedcam[0];
+            camera[0] = camera[0] + speedcam[0];
+            camera[2] = camera[2] + speedcam[2];
             //camera[0] = camera[0] + speedcam[0];
             glMatrix.mat4.lookAt(
                 view,
@@ -389,6 +420,7 @@ function main(){
             gl.enable(gl.DEPTH_TEST);
             gl.clearColor(0.5, 0.5, 0.5, 1);
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.drawElements(gl.TRIANGLES, indices4.length, gl.UNSIGNED_SHORT, 264);
             gl.uniform3fv(uLightConstant, [0, 0, 0]);
             gl.uniform1f(uAmbientIntensity, nrp)
             gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 0);
@@ -399,7 +431,7 @@ function main(){
             gl.uniform1f(uAmbientIntensity, intense);
             gl.uniform3fv(uLightPosition, [0.0, 0.0, 0.0]);
             gl.drawElements(gl.TRIANGLES, indices3.length, gl.UNSIGNED_SHORT, 192);
-            gl.drawElements(gl.TRIANGLES, indices4.length, gl.UNSIGNED_SHORT, 264);
+            
         }
         requestAnimationFrame(render);
     }

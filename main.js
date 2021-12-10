@@ -320,7 +320,8 @@ function main(){
     var intense = 0;
     var nrp = 0;
     var rightcube = 0;
-
+    var changecube = [0,0,0];
+    var changedube = [0,0,0];
     
     function onKeydown(event) {
         if (event.keyCode == 32){
@@ -358,6 +359,22 @@ function main(){
         {
             speedcam[0] = 0.029;
         }
+        if(event.keyCode == 87)
+        {
+            changecube[1] = 0.029;
+        }
+        if(event.keyCode == 83)
+        {
+            changecube[1] = -0.029;
+        }
+        if(event.keyCode == 65)
+        {
+            changecube[0] = -0.029;
+        }
+        if(event.keyCode == 68)
+        {
+            changecube[0] = 0.029;
+        }
     }
     
     function onKeyup(event) {
@@ -377,6 +394,22 @@ function main(){
         {
             speedcam[0] = 0;
         }
+        if(event.keyCode == 87)
+        {
+            changecube[1] = 0;
+        }
+        if(event.keyCode == 83)
+        {
+            changecube[1] = 0;
+        }
+        if(event.keyCode == 65)
+        {
+            changecube[0] = 0;
+        }
+        if(event.keyCode == 68)
+        {
+            changecube[0] = 0;
+        }
     }
     
     document.addEventListener("keydown", onKeydown, false);
@@ -387,6 +420,8 @@ function main(){
         if(!freeze) {
             camera[0] = camera[0] + speedcam[0];
             camera[2] = camera[2] + speedcam[2];
+            changedube[0] = changedube[0] + changecube[0];
+            changedube[1] = changedube[1] + changecube[1];
             //camera[0] = camera[0] + speedcam[0];
             glMatrix.mat4.lookAt(
                 view,
@@ -417,6 +452,13 @@ function main(){
             glMatrix.mat3.normalFromMat4(normalModel, model);
             gl.uniformMatrix3fv(uNormalModel, false, normalModel);
 
+            var whitecube = [
+                1.0, 0.0, 0.0, 0,
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, 0.0,
+                changedube[0], changedube[1], 0.0, 1.0
+            ];
+
             gl.enable(gl.DEPTH_TEST);
             gl.clearColor(0.5, 0.5, 0.5, 1);
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -427,6 +469,8 @@ function main(){
             gl.uniform3fv(uLightConstant, [rightcube, rightcube, rightcube]);
             gl.uniform1f(uAmbientIntensity, nrp);
             gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 96);
+
+            gl.uniformMatrix4fv(uModel, false, whitecube);
             gl.uniform3fv(uLightConstant, [xambient, yambient, zambient]);
             gl.uniform1f(uAmbientIntensity, intense);
             gl.uniform3fv(uLightPosition, [0.0, 0.0, 0.0]);

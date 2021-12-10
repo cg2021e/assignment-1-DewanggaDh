@@ -316,52 +316,42 @@ function main(){
     //var speed = [0/600, 0/60, 0/60];
     //var change = [0, 0, 0];
     var freeze = false;
+    var xambient = 0, yambient = 0, zambient = 0;
+    var intense = 0;
+    var nrp = 0;
+    var rightcube = 0;
 
-    /*
+    
     function onKeydown(event) {
-        if (event.keyCode == 87){
-            if(change[1] > 0.7)
-            speed[1] = 0;
-            else
-            speed[1] = 0.0029;
+        if (event.keyCode == 32){
+            if(xambient == 0 && yambient == 0 && zambient == 0 && intense == 0 && nrp == 0 && rightcube == 0){
+                xambient = 1;
+                yambient = 1;
+                zambient = 1;
+                intense = 1;
+                nrp = 0.029;
+                rightcube = 8.62;
+            }
+            else if (xambient == 1 && yambient == 1 && zambient == 1 && intense == 1 && nrp == 0.029 && rightcube == 8.62){
+                xambient = 0;
+                yambient = 0;
+                zambient = 0;
+                intense = 0;
+                nrp = 0;
+                rightcube = 0;
+            }
         }
-        if(event.keyCode == 83){
-            if(change[1] < -0.7)
-            speed[1] = 0;
-            else
-            speed[1] = -0.0029;
-        }
-        if(event.keyCode == 65){
-            if(camera[0] < -1)
-            speedcam[0] = 0;
-            else
-            speedcam[0] = -0.0029;
-        }
-        if(event.keyCode == 68){
-            if(camera[0] > 1)
-            speedcam[0] = 0;
-            else
-            speedcam[0] = 0.0029;
-        }
+        
     }
     
     function onKeyup(event) {
         if (event.keyCode == 87){
-            speed[1] = 0;
-        }
-        if(event.keyCode == 83){
-            speed[1] = 0;
-        }
-        if(event.keyCode == 65){
-            speedcam[0] = 0;
-        }
-        if(event.keyCode == 68){
-            speedcam[0] = 0;
         }
     }
+    
     document.addEventListener("keydown", onKeydown, false);
     document.addEventListener("keyup", onKeyup, true);
-    */
+    
 
     function render(){
         if(!freeze) {
@@ -400,13 +390,13 @@ function main(){
             gl.clearColor(0.5, 0.5, 0.5, 1);
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
             gl.uniform3fv(uLightConstant, [0, 0, 0]);
-            gl.uniform1f(uAmbientIntensity, 0.029)
+            gl.uniform1f(uAmbientIntensity, nrp)
             gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 0);
-            gl.uniform3fv(uLightConstant, [8.62, 8.62, 8.62]);
-            gl.uniform1f(uAmbientIntensity, 0.029);
+            gl.uniform3fv(uLightConstant, [rightcube, rightcube, rightcube]);
+            gl.uniform1f(uAmbientIntensity, nrp);
             gl.drawElements(gl.TRIANGLES, 48, gl.UNSIGNED_SHORT, 96);
-            gl.uniform3fv(uLightConstant, [1, 1, 1]);
-            gl.uniform1f(uAmbientIntensity, 1);
+            gl.uniform3fv(uLightConstant, [xambient, yambient, zambient]);
+            gl.uniform1f(uAmbientIntensity, intense);
             gl.uniform3fv(uLightPosition, [0.0, 0.0, 0.0]);
             gl.drawElements(gl.TRIANGLES, indices3.length, gl.UNSIGNED_SHORT, 192);
             gl.drawElements(gl.TRIANGLES, indices4.length, gl.UNSIGNED_SHORT, 264);

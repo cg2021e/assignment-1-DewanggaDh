@@ -121,6 +121,20 @@ function main(){
         0.05, -0.05, 0, 1, 1, 1, 0, -0.05, -0.05
     ];
 
+    /*
+        Color : #029029
+        RGB
+        R : 0.0078125
+        G : 0.5625
+        B : 0.16015625
+    */
+    var vertices4 = [
+        -10, -1, 1, 0.0078125, 0.5625, 0.16015625, 0,0,0,
+        10, -1, 1, 0.0078125, 0.5625, 0.16015625, 0,0,0,
+        10, -1, -19, 0.0078125, 0.5625, 0.16015625, 0,0,0,
+        -10, -1, -19, 0.0078125, 0.5625, 0.16015625, 0,0,0
+    ];
+
     var indices = [
         0, 1, 2, 0, 2, 3,
         4, 5, 6,
@@ -152,12 +166,17 @@ function main(){
         84, 85, 86, 84, 86, 87
     ];
 
+    var indices4 = [
+        88, 89, 90,
+        88, 90, 91
+    ];
+
     var vertices2 = [
-        ...vertices, ...vertices1, ...vertices3
+        ...vertices, ...vertices1, ...vertices3, ...vertices4
     ];
 
     var indices2 = [
-        ...indices, ...indices1, ...indices3
+        ...indices, ...indices1, ...indices3, ...indices4
     ];
 
     var vertexbuffer = gl.createBuffer();
@@ -390,6 +409,7 @@ function main(){
             gl.uniform1f(uAmbientIntensity, 1);
             gl.uniform3fv(uLightPosition, [0.0, 0.0, 0.0]);
             gl.drawElements(gl.TRIANGLES, indices3.length, gl.UNSIGNED_SHORT, 192);
+            gl.drawElements(gl.TRIANGLES, indices4.length, gl.UNSIGNED_SHORT, 264);
         }
         requestAnimationFrame(render);
     }
